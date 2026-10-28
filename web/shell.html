@@ -16,8 +16,10 @@
     <p id="storage-status" role="status">Opening browser save storage...</p>
     <p id="error" role="alert"></p>
     <section id="player" aria-label="Game player">
-      <canvas id="canvas" width="384" height="288" tabindex="0"
-        aria-label="Emberward game. Use arrows or WASD to move, Z to confirm, X to go back, C for camp."></canvas>
+      <div class="game-screen">
+        <canvas id="canvas" width="384" height="288" tabindex="0"
+          aria-label="Emberward game. Use arrows or WASD to move, Z to confirm, X to go back, C for camp."></canvas>
+      </div>
       <p id="play-status" role="status">Press Play to begin.</p>
       <div class="toolbar" aria-label="Game tools">
         <button id="save" data-command="0" disabled>Save</button>
@@ -53,7 +55,8 @@
         Private browsing, clearing site data, or storage eviction can erase them.</p>
       <p>Export downloads a portable save file. Import validates and loads a file, replacing the current
         journey; then choose Save to keep it in this browser. Export/import also works with the native game.</p>
-      <p>Sound starts after Play. The game and sound pause when you switch tabs or windows.
+      <p>Sound starts after Play. If your browser blocks it, click the game to resume sound.
+        The game and sound pause when you switch tabs or windows.
         Fullscreen is optional; unsupported browsers can play in the normal page.</p>
     </details>
     <details><summary>Runtime log</summary><pre id="log"></pre></details>

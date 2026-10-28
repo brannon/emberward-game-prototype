@@ -10,8 +10,9 @@ button:focus-visible, canvas:focus-visible { outline: 3px solid #56cfb0; outline
 #error:empty { display: none; }
 #storage-status, #play-status { color: #56cfb0; }
 #player { background: #0c1123; }
-/* SDL's high-DPI backend writes inline dimensions; the page owns canvas layout. */
-canvas { display: block; width: 100% !important; height: auto !important; aspect-ratio: 4 / 3; image-rendering: pixelated; background: black; touch-action: manipulation; }
+.game-screen { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: black; }
+/* SDL changes the canvas's intrinsic size; keep that from shifting the page layout. */
+#canvas { position: absolute; inset: 0; display: block; width: 100% !important; height: 100% !important; image-rendering: pixelated; background: black; touch-action: manipulation; }
 .toolbar, .actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .touch-controls { display: flex; justify-content: space-between; gap: 12px; margin: 16px 0; align-items: center; }
 .touch-controls button { touch-action: none; user-select: none; -webkit-user-select: none; }
@@ -25,7 +26,7 @@ details { margin: 16px 0; }
 summary { cursor: pointer; min-height: 32px; }
 pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 240px; overflow: auto; }
 #player:fullscreen { overflow: auto; padding: 8px; box-sizing: border-box; }
-#player:fullscreen canvas { width: min(100%, 86.6667dvh, 1152px) !important; margin: auto; }
+#player:fullscreen .game-screen { width: min(100%, 86.6667dvh, 1152px); margin: auto; }
 @media (max-width: 420px) {
   body { padding: 10px; }
   .touch-controls { gap: 8px; }

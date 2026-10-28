@@ -220,6 +220,8 @@ test("touch hold, pointer cancellation, pause, and small-screen layout", async (
 
 test("audio runs after user activation and fullscreen failure remains playable", async ({ page }) => {
   await play(page);
+  if (await page.evaluate(() => Module.SDL3.audioContext.state === "suspended"))
+    await page.locator("#canvas").click();
   await expect.poll(() => page.evaluate(() => Module.SDL3.audioContext.state)).toBe("running");
   expect(await audioPeak(page)).toBeGreaterThan(0.001);
   await page.evaluate(() => {
