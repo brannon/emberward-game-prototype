@@ -1,0 +1,75 @@
+name: Native and web
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: brew install sdl3 pkg-config
+      - run: make test smoke
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install pinned Emscripten
+        shell: bash
+        run: |
+          git clone https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
+          git -C "$RUNNER_TEMP/emsdk" checkout d7b4130688bfa348392b921ab04015aa15c4f154
+          "$RUNNER_TEMP/emsdk/emsdk" install 6.0.13
+          "$RUNNER_TEMP/emsdk/emsdk" activate 6.0.13
+      - name: Build and verify WASM game rules
+        shell: bash
+        run: |
+          source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
+          make web
+          emcc tests.c game.c -std=c11 -O2 -sENVIRONMENT=node -sEXIT_RUNTIME=1 \
+            -sSTACK_SIZE=1048576 -sSTACK_OVERFLOW_CHECK=2 -o "$RUNNER_TEMP/logic-tests.cjs"
+          node "$RUNNER_TEMP/logic-tests.cjs"
+      - run: npm --prefix web ci
+      - name: Install browser engines
+        working-directory: web
+        run: npx playwright install --with-deps chromium firefox webkit
+      - run: make web-test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-test-results
+          path: web/test-results/
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: web/dist/
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: [native, web]
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

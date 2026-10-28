@@ -1,0 +1,34 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #0c1123; color: #efefd7; }
+body { margin: 0; padding: 16px; }
+main { max-width: 1152px; margin: auto; }
+h1 { color: #f1c35b; font-size: clamp(20px, 4vw, 30px); }
+p { line-height: 1.5; }
+button { font: inherit; min-height: 44px; padding: 8px 14px; cursor: pointer; }
+button:disabled { cursor: default; opacity: .55; }
+button:focus-visible, canvas:focus-visible { outline: 3px solid #56cfb0; outline-offset: 2px; }
+#error { color: #ffb4a9; white-space: pre-wrap; }
+#error:empty { display: none; }
+#storage-status, #play-status { color: #56cfb0; }
+#player { background: #0c1123; }
+/* SDL's high-DPI backend writes inline dimensions; the page owns canvas layout. */
+canvas { display: block; width: 100% !important; height: auto !important; aspect-ratio: 4 / 3; image-rendering: pixelated; background: black; touch-action: manipulation; }
+.toolbar, .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.touch-controls { display: flex; justify-content: space-between; gap: 12px; margin: 16px 0; align-items: center; }
+.touch-controls button { touch-action: none; user-select: none; -webkit-user-select: none; }
+.dpad { display: grid; grid-template: repeat(2, 48px) / repeat(3, minmax(44px, 64px)); gap: 4px; }
+.up { grid-area: 1 / 2; }
+.left { grid-area: 2 / 1; }
+.down { grid-area: 2 / 2; }
+.right { grid-area: 2 / 3; }
+.actions { justify-content: flex-end; max-width: 240px; }
+details { margin: 16px 0; }
+summary { cursor: pointer; min-height: 32px; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 240px; overflow: auto; }
+#player:fullscreen { overflow: auto; padding: 8px; box-sizing: border-box; }
+#player:fullscreen canvas { width: min(100%, 86.6667dvh, 1152px) !important; margin: auto; }
+@media (max-width: 420px) {
+  body { padding: 10px; }
+  .touch-controls { gap: 8px; }
+  .actions { max-width: 120px; }
+  .actions button { width: 100%; }
+}

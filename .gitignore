@@ -1,0 +1,9 @@
+emberward
+test-game
+test-app
+*.dSYM/
+*.o
+web/dist/
+web/node_modules/
+web/test-results/
+web/playwright-report/

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Emberward: The Starless Coast. A free, original pixel-art adventure.">
+  <title>Emberward: The Starless Coast</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Emberward: The Starless Coast</h1>
+    <p>A small, original adventure. Explore the coast, gather your party, and recover the Star Lens.</p>
+    <button id="start" disabled>Loading...</button>
+    <p id="status" role="status">Downloading the game and artwork...</p>
+    <p id="storage-status" role="status">Opening browser save storage...</p>
+    <p id="error" role="alert"></p>
+    <section id="player" aria-label="Game player">
+      <canvas id="canvas" width="384" height="288" tabindex="0"
+        aria-label="Emberward game. Use arrows or WASD to move, Z to confirm, X to go back, C for camp."></canvas>
+      <p id="play-status" role="status">Press Play to begin.</p>
+      <div class="toolbar" aria-label="Game tools">
+        <button id="save" data-command="0" disabled>Save</button>
+        <button id="load" data-command="1" disabled>Load</button>
+        <button id="mute" data-command="2" aria-pressed="false" disabled>Mute</button>
+        <button id="fullscreen" disabled>Fullscreen</button>
+        <button id="export" disabled>Export save</button>
+        <button id="import" disabled>Import save</button>
+        <input id="save-file" type="file" accept=".sav,text/plain" hidden>
+      </div>
+      <div class="touch-controls" aria-label="Touch and mouse controls">
+        <div class="dpad">
+          <button data-input="0" class="up" aria-label="Move up" disabled>Up</button>
+          <button data-input="2" class="left" aria-label="Move left" disabled>Left</button>
+          <button data-input="1" class="down" aria-label="Move down" disabled>Down</button>
+          <button data-input="3" class="right" aria-label="Move right" disabled>Right</button>
+        </div>
+        <div class="actions">
+          <button data-input="4" disabled>Confirm</button>
+          <button data-input="5" disabled>Back</button>
+          <button data-input="6" disabled>Camp</button>
+        </div>
+      </div>
+    </section>
+    <details>
+      <summary>Controls and browser saves</summary>
+      <p>Arrows / WASD: move. Z / Enter / Space: confirm. X / Escape / Backspace: back.
+        C: camp. M: mute. F5: save. F9: load. Shortcuts apply while the game has focus.
+        Tab moves between page controls. Touch controls also work with a mouse.</p>
+      <p>Save while exploring or camping; load on the title screen, while exploring, or in camp.
+        Wait for confirmation before closing the page. There is no autosave.
+        Saves belong to this browser and site, not your GitHub account.
+        Private browsing, clearing site data, or storage eviction can erase them.</p>
+      <p>Export downloads a portable save file. Import validates and loads a file, replacing the current
+        journey; then choose Save to keep it in this browser. Export/import also works with the native game.</p>
+      <p>Sound starts after Play. The game and sound pause when you switch tabs or windows.
+        Fullscreen is optional; unsupported browsers can play in the normal page.</p>
+    </details>
+    <details><summary>Runtime log</summary><pre id="log"></pre></details>
+    <noscript>This game requires JavaScript, WebAssembly, and WebGL.</noscript>
+  </main>
+  <script src="app.js"></script>
+  {{{ SCRIPT }}}
+</body>
+</html>
