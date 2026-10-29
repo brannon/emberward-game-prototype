@@ -218,10 +218,15 @@ test("touch hold, pointer cancellation, pause, and small-screen layout", async (
   expect(await exportJourney(page)).toBe(paused);
 });
 
-test("audio runs after user activation and fullscreen failure remains playable", async ({ page }) => {
+test("audio runs after user activation", async ({ page, browserName }) => {
+  test.skip(browserName === "firefox", "Firefox headless keeps Web Audio suspended in CI");
   await play(page);
   await expect.poll(() => page.evaluate(() => Module.SDL3.audioContext.state)).toBe("running");
   expect(await audioPeak(page)).toBeGreaterThan(0.001);
+});
+
+test("fullscreen failure remains playable", async ({ page }) => {
+  await play(page);
   await page.evaluate(() => {
     document.getElementById("player").requestFullscreen = () => Promise.reject(new Error("Fullscreen denied for test"));
   });
