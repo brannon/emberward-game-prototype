@@ -263,3 +263,19 @@ the game reports the error and remains playable without sound.
 
 The game is a compact adventure rather than a full commercial RPG: one town,
 one dungeon, six enemy types, four fixed classes, and a complete ending.
+
+## Implementation Notes
+
+This game prototype was 100% vibe-coded using **GitHub Copilot in VS Code**. I used **Copilot Fusion (Standard)** exclusively. All images were generated using the new image generation feature in GitHub Copilot.
+
+Work was done over a handful of sessions, with the following AIC costs:
+
+| Session Task | AIC Cost |
+| --- | --- |
+| Initial working game without images | 95.2 |
+| Main session to generate and refine images | 693.5 |
+| Expand and cleanup up the terrain map | 19.6 |
+| Fix battle character sizing to be consistent | 23.1 |
+| Fix archer bow rendering | 0.7 |
+| Web port to Emscripten/WASM | 183.3 |
+| Total | 1015.4 |
