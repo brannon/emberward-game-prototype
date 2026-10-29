@@ -16,10 +16,6 @@
     <p id="storage-status" role="status">Opening browser save storage...</p>
     <p id="error" role="alert"></p>
     <section id="player" aria-label="Game player">
-      <div class="game-screen">
-        <canvas id="canvas" width="384" height="288" tabindex="0"
-          aria-label="Emberward game. Use arrows or WASD to move, Z to confirm, X to go back, C for camp."></canvas>
-      </div>
       <p id="play-status" role="status">Press Play to begin.</p>
       <div class="toolbar" aria-label="Game tools">
         <button id="save" data-command="0" disabled>Save</button>
@@ -42,6 +38,10 @@
           <button data-input="5" disabled>Back</button>
           <button data-input="6" disabled>Camp</button>
         </div>
+      </div>
+      <div class="game-screen">
+        <canvas id="canvas" width="384" height="288" tabindex="0"
+          aria-label="Emberward game. Use arrows or WASD to move, Z to confirm, X to go back, C for camp."></canvas>
       </div>
     </section>
     <details>
