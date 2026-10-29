@@ -44,7 +44,7 @@ jobs:
       - run: npm --prefix web ci
       - name: Install browser engines
         working-directory: web
-        run: npx playwright install --with-deps chromium firefox webkit
+        run: npx playwright install --with-deps chromium firefox
       - run: make web-test
       - uses: actions/upload-artifact@v4
         if: failure()
