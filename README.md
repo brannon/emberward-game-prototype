@@ -1,5 +1,7 @@
 # Emberward: The Starless Coast
 
+Play in your browser: https://brannon.github.io/emberward-game-prototype/
+
 A complete, small NES-inspired role-playing game in C11 and SDL3. Explore a
 tile-based coastline, meet the villagers of Brindle, lead a party of four through
 turn-based encounters, and recover the stolen Star Lens from the Ash Wyrm.
